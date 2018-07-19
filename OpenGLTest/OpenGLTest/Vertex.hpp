@@ -35,14 +35,16 @@ public:
     Vertex();
 public:
     //需要绘制的顶点数据
-     float m_vetex[18] = {
-        0.0,    0.5f,  0.0,  1.0,  0.0,   0.0, // x, y, z, r, g, b,每一行存储一个点的信息，位置和颜色
-        -1.0f, -0.5f,  0.0,  0.0,  1.0,   0.0, //
-        1.0f,  -1.0f,  0.0,  0.0,  0.0,   1.0, //
+    float m_vetex[32] = {
+        // positions          // colors           // texture coords
+        0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+        0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left
     };
-    
-    GLuint m_index[3] = {
-        0,1,2,
+    GLuint m_index[6] = {
+        0, 1, 3, // first triangle
+        1, 2, 3  // second triangle
     };
 
 };

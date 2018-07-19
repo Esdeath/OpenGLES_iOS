@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0012C8AB21002660001DE409 /* wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0012C8AA21002660001DE409 /* wall.jpg */; };
+		0012C8AE21003CD2001DE409 /* until.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0012C8AC21003CD2001DE409 /* until.mm */; };
+		0012C8B021006794001DE409 /* container.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0012C8AF21006794001DE409 /* container.jpg */; };
+		0012C8B22100C8D9001DE409 /* awesomeface.png in Resources */ = {isa = PBXBuildFile; fileRef = 0012C8B12100C8D9001DE409 /* awesomeface.png */; };
 		006E3B1F20EA1D13004B25EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 006E3B1E20EA1D13004B25EC /* AppDelegate.m */; };
 		006E3B2220EA1D13004B25EC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 006E3B2120EA1D13004B25EC /* ViewController.mm */; };
 		006E3B2720EA1D13004B25EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006E3B2620EA1D13004B25EC /* Assets.xcassets */; };
@@ -39,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0012C8AA21002660001DE409 /* wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall.jpg; sourceTree = "<group>"; };
+		0012C8AC21003CD2001DE409 /* until.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = until.mm; sourceTree = "<group>"; };
+		0012C8AD21003CD2001DE409 /* until.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = until.hpp; sourceTree = "<group>"; };
+		0012C8AF21006794001DE409 /* container.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = container.jpg; sourceTree = "<group>"; };
+		0012C8B12100C8D9001DE409 /* awesomeface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = awesomeface.png; sourceTree = "<group>"; };
 		006E3B1A20EA1D13004B25EC /* OpenGLTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGLTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006E3B1D20EA1D13004B25EC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		006E3B1E20EA1D13004B25EC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -122,6 +131,9 @@
 				006E3B2120EA1D13004B25EC /* ViewController.mm */,
 				006E3B2620EA1D13004B25EC /* Assets.xcassets */,
 				006E3B2B20EA1D13004B25EC /* Info.plist */,
+				0012C8AA21002660001DE409 /* wall.jpg */,
+				0012C8B12100C8D9001DE409 /* awesomeface.png */,
+				0012C8AF21006794001DE409 /* container.jpg */,
 				006E3B2C20EA1D13004B25EC /* main.m */,
 				006E3B5920EA6090004B25EC /* ShaderProgram.mm */,
 				006E3B5A20EA6090004B25EC /* ShaderProgram.hpp */,
@@ -129,6 +141,8 @@
 				00E68F8D20F87F8100A30AF2 /* Vertex.hpp */,
 				00E68F8F20F88D2700A30AF2 /* Triangles.mm */,
 				00E68F9020F88D2700A30AF2 /* Triangles.hpp */,
+				0012C8AC21003CD2001DE409 /* until.mm */,
+				0012C8AD21003CD2001DE409 /* until.hpp */,
 			);
 			path = OpenGLTest;
 			sourceTree = "<group>";
@@ -268,6 +282,9 @@
 				00A7631520EDF937005B595D /* fragmentShader.glsl in Resources */,
 				00A7631420EDF937005B595D /* vertexShader.glsl in Resources */,
 				006E3B2720EA1D13004B25EC /* Assets.xcassets in Resources */,
+				0012C8B021006794001DE409 /* container.jpg in Resources */,
+				0012C8B22100C8D9001DE409 /* awesomeface.png in Resources */,
+				0012C8AB21002660001DE409 /* wall.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +315,7 @@
 				00E68F9120F88D2700A30AF2 /* Triangles.mm in Sources */,
 				006E3B2D20EA1D13004B25EC /* main.m in Sources */,
 				006E3B1F20EA1D13004B25EC /* AppDelegate.m in Sources */,
+				0012C8AE21003CD2001DE409 /* until.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

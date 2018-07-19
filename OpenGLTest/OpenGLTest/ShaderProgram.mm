@@ -23,7 +23,7 @@ void ShaderProgram::Init()
     //2.顶点着色器的代码
     char* vertexShaderCode   = loadFileCode("vertexShader.glsl", fileSize);
     //3.创建片段着色器
-    GLuint fragmentShader  =  createShader(fragmentShaderCode, GL_FRAGMENT_SHADER);
+    GLuint fragmentShader    = createShader(fragmentShaderCode, GL_FRAGMENT_SHADER);
     if (fragmentShader == 0) {
         return ;
     }
@@ -36,36 +36,45 @@ void ShaderProgram::Init()
     mProgram =  createProgram(fragmentShader, vertexShader);
     if (mProgram != 0) {
         //glGetAttribLocation获取顶点着色器 attribute修饰的变量名的index。可以通过这个index向顶点着色器传递数据
-        mColorUniform = glGetUniformLocation(mProgram, "ourColor");
-        
         mPositionLocation = glGetAttribLocation(mProgram, "position");
         mColorLocation    = glGetAttribLocation(mProgram, "color");
+        mTexCoordLocation = glGetAttribLocation(mProgram, "aTexCoord");
+        
+        mTexture1Location = glGetUniformLocation(mProgram, "texture1");
+        mTexture2Location = glGetUniformLocation(mProgram, "texture2");
+
     }
     
     delete fragmentShaderCode ;
     delete vertexShaderCode;
 }
 
-/**
- 加载文件数据
+//static float seconds = 1;
 
- @param fileName 文件名
- @param fileSize 文件大小
- @return 数据内容
- */
-char* ShaderProgram::loadFileCode(const char* fileName ,int &fileSize)
+void ShaderProgram::Draw(float* vertex)
 {
-    char* fileContent=nullptr;
-    fileSize=0;
-    NSString *nsPath=[[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:fileName] ofType:nil];
-    NSData*data=[NSData dataWithContentsOfFile:nsPath];
-    if([data length]>0){
-        fileSize=(int)[data length];
-        fileContent=new  char[fileSize+1];
-        memcpy(fileContent, [data bytes], fileSize);
-        fileContent[fileSize]='\0';
-    }
-    return fileContent;
+    //1.使用程序
+    glUseProgram(mProgram);
+    //2.激活顶点坐标数组
+    glEnableVertexAttribArray(mPositionLocation);
+    //将顶点坐标传入到着色器中
+    glVertexAttribPointer(mPositionLocation, 3, GL_FLOAT, GL_FALSE, 8*sizeof(*vertex), (void*)0);
+    //3.激活顶点颜色数组
+    glEnableVertexAttribArray(mColorLocation);
+    //将顶点颜色传入到着色器中
+    glVertexAttribPointer(mColorLocation, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(*vertex), (void*)(sizeof(*vertex)*3));
+    
+    //4.激活纹理
+    glEnableVertexAttribArray(mTexCoordLocation);
+    glVertexAttribPointer(mTexCoordLocation, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(*vertex), (void*)(6 * sizeof(*vertex)));
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, mTexture1Location);
+    glUniform1i(mProgram, mTexture1Location);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, mTexture2Location);
+    glUniform1i(mProgram, mTexture2Location);
 }
 
 
@@ -140,25 +149,6 @@ GLuint ShaderProgram::createProgram(GLuint fragmentShader, GLuint vertexShader)
     return program;
 }
 
-static float seconds = 1;
 
-void ShaderProgram::Draw(float* vertex)
-{
-    //1.使用程序
-    glUseProgram(mProgram);
-    //2.激活顶点坐标数组
-    glEnableVertexAttribArray(mPositionLocation);
-    //将顶点坐标传入到着色器中
-    glVertexAttribPointer(mPositionLocation, 3, GL_FLOAT, GL_FALSE, 6*sizeof(*vertex), (void*)0);
-    //3.激活顶点颜色数组
-    glEnableVertexAttribArray(mColorLocation);
-    //将顶点颜色传入到着色器中
-    glVertexAttribPointer(mColorLocation, 3, GL_FLOAT, GL_FALSE, 6*sizeof(*vertex), (void*)(sizeof(float)*3));
-    
-    seconds ++;
-    float greenValue = (sin(seconds*0.01) / 2.0f) + 0.5f;
-    glUniform4f(mColorUniform, 0.0f, greenValue, 0.0f, 1.0f);
-    
-}
 
 

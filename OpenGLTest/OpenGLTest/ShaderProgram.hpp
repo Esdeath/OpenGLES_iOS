@@ -14,6 +14,7 @@
 #include <OpenGLES/ES2/glext.h>
 #include <OpenGLES/ES3/gl.h>
 #include <OpenGLES/ES3/glext.h>
+#import "until.hpp"
 
 class ShaderProgram {
     
@@ -23,7 +24,6 @@ public:
 
     ShaderProgram();
 private:
-    char*  loadFileCode(const char* fileName ,int &fileSize);
     GLuint createProgram(GLuint fragmentShader , GLuint vertexShader);
     GLuint createShader(const char* shaderCode, GLenum shaderType);
     
@@ -35,7 +35,12 @@ private:
     
     GLuint mPositionLocation;
     GLuint mColorLocation;
+    GLuint mTexCoordLocation;
     GLuint mColorUniform;
+    
+    GLuint mTexture1Location;
+    GLuint mTexture2Location;
+
 };
 
 #endif /* ShaderProgram_hpp */
