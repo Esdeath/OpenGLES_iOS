@@ -30,13 +30,10 @@ private:
 private:
     GLuint mProgram;
     
-    GLuint mPosition;
-    GLuint mColor;
-    
+
     GLuint mPositionLocation;
     GLuint mColorLocation;
     GLuint mTexCoordLocation;
-    GLuint mColorUniform;
     
     GLuint mTexture1Location;
     GLuint mTexture2Location;

@@ -21,8 +21,8 @@ void Triangles::Draw()
     
     m_shaderProgram->Draw(m_vertex->m_vetex);
     
-   // glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+    ///// glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     m_vertex->UnBind();
 }
 

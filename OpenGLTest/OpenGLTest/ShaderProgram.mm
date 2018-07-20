@@ -39,17 +39,12 @@ void ShaderProgram::Init()
         mPositionLocation = glGetAttribLocation(mProgram, "position");
         mColorLocation    = glGetAttribLocation(mProgram, "color");
         mTexCoordLocation = glGetAttribLocation(mProgram, "aTexCoord");
-        
         mTexture1Location = glGetUniformLocation(mProgram, "texture1");
-        mTexture2Location = glGetUniformLocation(mProgram, "texture2");
-
     }
     
     delete fragmentShaderCode ;
     delete vertexShaderCode;
 }
-
-//static float seconds = 1;
 
 void ShaderProgram::Draw(float* vertex)
 {
@@ -59,6 +54,7 @@ void ShaderProgram::Draw(float* vertex)
     glEnableVertexAttribArray(mPositionLocation);
     //将顶点坐标传入到着色器中
     glVertexAttribPointer(mPositionLocation, 3, GL_FLOAT, GL_FALSE, 8*sizeof(*vertex), (void*)0);
+    
     //3.激活顶点颜色数组
     glEnableVertexAttribArray(mColorLocation);
     //将顶点颜色传入到着色器中
@@ -72,9 +68,6 @@ void ShaderProgram::Draw(float* vertex)
     glBindTexture(GL_TEXTURE_2D, mTexture1Location);
     glUniform1i(mProgram, mTexture1Location);
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, mTexture2Location);
-    glUniform1i(mProgram, mTexture2Location);
 }
 
 
