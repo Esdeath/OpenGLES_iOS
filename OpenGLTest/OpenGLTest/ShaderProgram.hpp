@@ -36,7 +36,6 @@ private:
     GLuint mTexCoordLocation;
     
     GLuint mTexture1Location;
-    GLuint mTexture2Location;
 
 };
 

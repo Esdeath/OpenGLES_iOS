@@ -135,7 +135,7 @@ GLuint ShaderProgram::createProgram(GLuint fragmentShader, GLuint vertexShader)
         char log[1024] = {0};
         GLsizei writed = 0;
         glGetProgramInfoLog(program, 1024, &writed, log);
-        printf("create gpu program fail,link error : %s\n", log);
+        printf("Create gpu program fail,link error : %s\n", log);
         glDeleteProgram(program);
         program = 0;
     }
