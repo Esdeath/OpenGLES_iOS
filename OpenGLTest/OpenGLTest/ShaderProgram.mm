@@ -15,24 +15,21 @@ ShaderProgram::ShaderProgram()
 
 void ShaderProgram::Init(const char* vs , const char* fs)
 {
-    int fileSize = 0;
-    //1.片段着色器的代码
-    char* fragmentShaderCode = loadFileCode(fs, fileSize);
-    //2.顶点着色器的代码
-    char* vertexShaderCode   = loadFileCode(vs, fileSize);
-    //3.创建片段着色器
-    GLuint fragmentShader    = createShader(fragmentShaderCode, GL_FRAGMENT_SHADER);
+
+    //1.创建片段着色器
+    GLuint fragmentShader    = createShader(fs, GL_FRAGMENT_SHADER);
     if (fragmentShader == 0) {
+        printf("Failed To create Fragment shader");
         return ;
     }
-    //4.创建顶点着色器
-    GLuint vertexShader  =  createShader(vertexShaderCode, GL_VERTEX_SHADER);
+    //2.创建顶点着色器
+    GLuint vertexShader  =  createShader(vs, GL_VERTEX_SHADER);
     
     if (vertexShader == 0) {
+        printf("Failed To create Vertex shader");
         return ;
     }
-    
-    //5.使用顶点着色器和片段着色器创建程序
+    //3.使用顶点着色器和片段着色器创建程序
     mProgram =  createProgram(fragmentShader, vertexShader);
     if (mProgram != 0) {
         //glGetAttribLocation获取顶点着色器 attribute修饰的变量名的index。可以通过这个index向顶点着色器传递数据
@@ -40,15 +37,14 @@ void ShaderProgram::Init(const char* vs , const char* fs)
         mColorLocation    = glGetAttribLocation(mProgram, "color");
         mTexCoordLocation = glGetAttribLocation(mProgram, "aTexCoord");
         
-        mModelMatrixLocation = glGetUniformLocation(mProgram, "ModelMatrix");
-        mViewMatrixLocation = glGetUniformLocation(mProgram, "ViewMatrix");
+        mModelMatrixLocation      = glGetUniformLocation(mProgram, "ModelMatrix");
+        mViewMatrixLocation       = glGetUniformLocation(mProgram, "ViewMatrix");
         mProjectionMatrixLocation = glGetUniformLocation(mProgram, "ProjectionMatrix");
-        mIT_ModelMatrix = glGetUniformLocation(mProgram, "IT_ModelMatrix");
-        mNormalLocation = glGetAttribLocation(mProgram, "normal");
+        mIT_ModelMatrix           = glGetUniformLocation(mProgram, "IT_ModelMatrix");
+        mNormalLocation           = glGetAttribLocation(mProgram, "normal");
     }
     
-    delete fragmentShaderCode ;
-    delete vertexShaderCode;
+
 }
 
 void ShaderProgram::Draw(float* vertex,float *M,float *V,float  *P)
@@ -64,13 +60,13 @@ void ShaderProgram::Draw(float* vertex,float *M,float *V,float  *P)
         glUniform4fv(iter->second->mLocation, 1, iter->second->v);
     }
     
-    int iIndex = 0;
-    for (auto iter=mUniformTextures.begin();iter!=mUniformTextures.end();++iter){
-        glActiveTexture(GL_TEXTURE0 + iIndex);
-        glBindTexture(GL_TEXTURE_2D, iter->second->mTexture);
-        glUniform1i(iter->second->mLocation, iIndex);
-    }
-    
+//    int iIndex = 0;
+//    for (auto iter=mUniformTextures.begin();iter!=mUniformTextures.end();++iter){
+//        glActiveTexture(GL_TEXTURE0 + iIndex);
+//        glBindTexture(GL_TEXTURE_2D, iter->second->mTexture);
+//        glUniform1i(iter->second->mLocation, iIndex);
+//    }
+//
     //2.激活顶点坐标数组
     glEnableVertexAttribArray(mPositionLocation);
     //将顶点坐标传入到着色器中
@@ -84,6 +80,8 @@ void ShaderProgram::Draw(float* vertex,float *M,float *V,float  *P)
     glVertexAttribPointer(mTexCoordLocation, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(*vertex), (void*)(6 * sizeof(*vertex)));
 
 }
+
+
 
 void ShaderProgram::SetVec4(const char *name, float x, float y, float z, float w)
 {
@@ -128,19 +126,31 @@ void ShaderProgram::SetTexture(const char *name, const char *imagePath)
 /**
  创建shader
 
- @param shaderCode shader的代码
+ @param shaderName shader的代码
  @param shaderType shader类型
  @return 返回shader标识符
  */
-GLuint ShaderProgram::createShader(const char *shaderCode, GLenum shaderType)
+GLuint ShaderProgram::createShader(const char *shaderName, GLenum shaderType)
 {
     //1.根据shaderType来创建shader
     GLuint shader =   glCreateShader(shaderType);
+    if (shader == 0){
+        printf("glCreateShader fail\n");
+        return 0;
+    }
+    int fileSize = 0;
+    const char* shaderCode = loadFileCode(shaderName, fileSize);
+    if (shaderCode == nullptr){
+        printf("load shader code from file : %s fail\n", shaderCode);
+        glDeleteShader(shader);
+        delete shaderCode;
+        return 0;
+    }
+    
     //2.将shader和shader代码绑定
     glShaderSource(shader, 1, &shaderCode, nullptr);
     //3.编译shader
     glCompileShader(shader);
-    
     GLint compileResult = GL_TRUE;
     //4.获取shader的编译信息
     glGetShaderiv(shader, GL_COMPILE_STATUS, &compileResult);
@@ -153,6 +163,7 @@ GLuint ShaderProgram::createShader(const char *shaderCode, GLenum shaderType)
         glDeleteShader(shader);
         shader = 0;
     }
+    delete shaderCode;
     return shader;
 }
 

@@ -19,9 +19,7 @@ void Triangles::Init()
 void Triangles::Draw()
 {
     m_vertex->Bind();
-    
     m_shaderProgram->Draw(m_vertex->m_vetex,nullptr,nullptr,nullptr);
-    
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     m_vertex->UnBind();
 }

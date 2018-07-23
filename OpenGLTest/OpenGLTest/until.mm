@@ -9,6 +9,9 @@
 #include "until.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+
+GLuint CreateTexture2D(unsigned char*pixelData, int width, int height, GLenum type);
+
 /**
  加载文件数据
  
@@ -16,8 +19,6 @@
  @param fileSize 文件大小
  @return 数据内容
  */
-GLuint CreateTexture2D(unsigned char*pixelData, int width, int height, GLenum type);
-
 char* loadFileCode(const char* fileName ,int &fileSize)
 {
     char* fileContent=nullptr;
