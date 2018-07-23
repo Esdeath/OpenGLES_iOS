@@ -12,16 +12,16 @@
 void Triangles::Init()
 {
     m_vertex->Init();
-    m_shaderProgram->Init();
+    m_shaderProgram->Init("vertexShader.glsl", "fragmentShader.glsl");
+    m_shaderProgram->SetTexture("texture1", "wall.jpg");
 }
 
 void Triangles::Draw()
 {
     m_vertex->Bind();
     
-    m_shaderProgram->Draw(m_vertex->m_vetex);
+    m_shaderProgram->Draw(m_vertex->m_vetex,nullptr,nullptr,nullptr);
     
-    ///// glDrawArrays(GL_TRIANGLES, 0, 3);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     m_vertex->UnBind();
 }

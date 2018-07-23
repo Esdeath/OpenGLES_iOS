@@ -10,9 +10,13 @@
 #define until_hpp
 
 #include <stdio.h>
-#import <UIKit/UIKit.h>
+#include "ggl.h"
 char*  loadFileCode(const char* fileName ,int &fileSize);
 
-char*  loadPicture(const char* strPath, int &width,int &height);
+GLuint CreateBufferObject(GLenum bufferType, GLsizeiptr size, GLenum usage, void*data = nullptr);
+
+GLuint CreateTexture2DFromPicture(const char *imgFilePath) ;
+
+
 
 #endif /* until_hpp */

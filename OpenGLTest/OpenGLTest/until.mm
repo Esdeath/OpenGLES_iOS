@@ -7,7 +7,8 @@
 //
 
 #include "until.hpp"
-#import <UIKit/UIKit.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 /**
  加载文件数据
  
@@ -15,6 +16,8 @@
  @param fileSize 文件大小
  @return 数据内容
  */
+GLuint CreateTexture2D(unsigned char*pixelData, int width, int height, GLenum type);
+
 char* loadFileCode(const char* fileName ,int &fileSize)
 {
     char* fileContent=nullptr;
@@ -30,27 +33,46 @@ char* loadFileCode(const char* fileName ,int &fileSize)
     return fileContent;
 }
 
-char*  loadPicture(const char* strPath,int &width,int &height)
-{
-    NSString* strPaths = [NSString stringWithUTF8String:strPath];
-    UIImage *img = [UIImage imageNamed:strPaths];
-    // 将图片数据以RGBA的格式导出到textureData中
-    CGImageRef imageRef = [img CGImage];
-    width = (int)CGImageGetWidth(imageRef);
-    height = (int)CGImageGetHeight(imageRef);
-    
-    char *textureData = (char *)malloc(width * height * 4);
-    
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    NSUInteger bytesPerPixel = 4;
-    NSUInteger bytesPerRow = bytesPerPixel * width;
-    NSUInteger bitsPerComponent = 8;
-    
-    CGContextRef context = CGBitmapContextCreate(textureData, width, height,
-                                                 bitsPerComponent, bytesPerRow, colorSpace,
-                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-    CGColorSpaceRelease(colorSpace);
-    CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
-    CGContextRelease(context);
-    return textureData;
+
+
+GLuint CreateBufferObject(GLenum bufferType, GLsizeiptr size, GLenum usage, void*data /* = nullptr */){
+    GLuint object;
+    //1.生成新的vbo（顶点缓存对象）
+    glGenBuffers(1, &object);
+    //2.将顶点缓存对象绑定到顶点数组对象
+    glBindBuffer(bufferType, object);
+    //3.将数据拷贝到缓存对象
+    glBufferData(bufferType, size, data, usage);
+    return object;
 }
+
+
+GLuint CreateTexture2D(unsigned char*pixelData, int width, int height, GLenum type) {
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, type, GL_UNSIGNED_BYTE, pixelData);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    return texture;
+}
+
+
+GLuint CreateTexture2DFromPicture(const char *imgFilePath) {
+    
+    int width, height, nrChannels;
+    NSString *nsPath=[[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:imgFilePath] ofType:nil];
+    char* strPath = (char*)[nsPath UTF8String];
+    unsigned char *pixelData = stbi_load(strPath, &width, &height, &nrChannels, 0);
+    GLuint texture = CreateTexture2D((unsigned char*)pixelData, width, height, GL_RGB);
+
+    return texture;
+}
+
+
+
+

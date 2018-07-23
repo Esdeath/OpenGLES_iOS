@@ -10,11 +10,7 @@
 #define Vertex_hpp
 
 #include <stdio.h>
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
-#include <vector>
-
-
+#include "ggl.h"
 typedef struct {
     GLfloat Positon[3];//位置
     GLfloat Normal[3];//法线
@@ -27,12 +23,15 @@ using namespace std;
 class Vertex {
     
 private:
+    
 public:
     void Init();
     void Bind();
     void UnBind();
+
     
     Vertex();
+    
 public:
     //需要绘制的顶点数据
     float m_vetex[32] = {
