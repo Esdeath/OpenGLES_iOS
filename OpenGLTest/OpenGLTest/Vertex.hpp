@@ -11,39 +11,36 @@
 
 #include <stdio.h>
 #include "ggl.h"
-typedef struct {
-    GLfloat Positon[3];//位置
-    GLfloat Normal[3];//法线
-    GLfloat Color[4];//颜色
-    GLfloat TexCoord[2];//纹理
-} VertexStruct;
 
-using namespace std;
 
 class Vertex {
     
 private:
+    VertexStruct *mVertexes;
+    int mVertexCount;
+
     
+    float  *mIndex;
+    int mIndexCount;
 public:
     void Init();
     void Bind();
     void UnBind();
 
     Vertex();
+    ~Vertex();
+
+    void SetIndex(int indexCount);
+    void SetIndexData(int index,float x);
     
-public:
-    //需要绘制的顶点数据
-    float m_vetex[32] = {
-        //positions          //colors           //texture coords
-        0.5f,   0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-        0.5f,  -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.5f, 0.0f, // bottom left
-        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left
-    };
-    GLuint m_index[6] = {
-        0, 1, 3, // first triangle
-        1, 2, 3  // second triangle
-    };
+    void SetSize(int vertexCount);
+    void SetColor(int index, float r, float g, float b, float a=1.0);
+    void SetTexcoord(int index, float x, float y);
+    void SetNormal(int index, float x, float y, float z);
+    void SetPosition(int index, float x, float y, float z, float w = 1.0f);
+    VertexStruct &Get(int index);
+    
+
 
 };
 

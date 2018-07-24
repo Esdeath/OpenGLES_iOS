@@ -36,18 +36,33 @@ class ShaderProgram {
     
 public:
     void Init(const char* vs , const char* fs);
-    void Draw(float* vertex,float *M,float *V,float *P);
+    void Draw(float *M,float *V,float *P);
     
     void SetVec4(const char* name,float x, float y,float z, float w);
     void SetTexture(const char* name, const char* imagePath);
 
     ShaderProgram();
     
+
 private:
-    GLuint createProgram(GLuint fragmentShader , GLuint vertexShader);
-    GLuint createShader(const char* shaderCode, GLenum shaderType);
+    GLuint mProgram;
     
+    GLuint mPosition;
+    GLuint mColor;
+    GLuint mTexcoord;
+    GLuint mNormal;
     
+    GLuint mPositionLocation;
+    GLuint mColorLocation;
+    GLuint mTexCoordLocation;
+    GLuint mNormalLocation;
+    
+    GLint mModelMatrixLocation, mViewMatrixLocation, mProjectionMatrixLocation,mIT_ModelMatrix;
+
+    unordered_map<string, UniformVector4f*> mUniformVec4s;
+    unordered_map<string, UniformTexture*>  mUniformTextures;
+    
+public:
     void setBool(const std::string &name, bool value) const
     {
         glUniform1i(glGetUniformLocation(mProgram, name.c_str()), (int)value);
@@ -60,7 +75,7 @@ private:
     {
         glUniform1f(glGetUniformLocation(mProgram, name.c_str()), value);
     }
-
+    
     void setVec2(const std::string &name, const glm::vec2 &value) const
     {
         glUniform2fv(glGetUniformLocation(mProgram, name.c_str()), 1, &value[0]);
@@ -77,7 +92,7 @@ private:
     {
         glUniform3f(glGetUniformLocation(mProgram, name.c_str()), x, y, z);
     }
-
+    
     void setVec4(const std::string &name, const glm::vec4 &value) const
     {
         glUniform4fv(glGetUniformLocation(mProgram, name.c_str()), 1, &value[0]);
@@ -99,24 +114,6 @@ private:
     {
         glUniformMatrix4fv(glGetUniformLocation(mProgram, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
-    
-private:
-    GLuint mProgram;
-    
-    GLuint mPosition;
-    GLuint mColor;
-    GLuint mTexcoord;
-    GLuint mNormal;
-    
-    GLuint mPositionLocation;
-    GLuint mColorLocation;
-    GLuint mTexCoordLocation;
-    GLuint mNormalLocation;
-    
-    GLint mModelMatrixLocation, mViewMatrixLocation, mProjectionMatrixLocation,mIT_ModelMatrix;
-
-    unordered_map<string, UniformVector4f*> mUniformVec4s;
-    unordered_map<string, UniformTexture*>  mUniformTextures;
 
 };
 

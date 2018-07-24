@@ -8,6 +8,7 @@
 
 //1.顶点数据 ---- 顶点着色器 ---- 图元装配 ----- 几何着色器 ----- 测试与混合 ----- 片段着色器 -----光栅化
 #include "ShaderProgram.hpp"
+#include "Vertex.hpp"
 ShaderProgram::ShaderProgram()
 {
     mProgram = 0;
@@ -43,11 +44,9 @@ void ShaderProgram::Init(const char* vs , const char* fs)
         mIT_ModelMatrix           = glGetUniformLocation(mProgram, "IT_ModelMatrix");
         mNormalLocation           = glGetAttribLocation(mProgram, "normal");
     }
-    
-
 }
 
-void ShaderProgram::Draw(float* vertex,float *M,float *V,float  *P)
+void ShaderProgram::Draw(float *M,float *V,float *P)
 {
     //1.使用程序
     glUseProgram(mProgram);
@@ -60,24 +59,21 @@ void ShaderProgram::Draw(float* vertex,float *M,float *V,float  *P)
         glUniform4fv(iter->second->mLocation, 1, iter->second->v);
     }
     
-//    int iIndex = 0;
-//    for (auto iter=mUniformTextures.begin();iter!=mUniformTextures.end();++iter){
-//        glActiveTexture(GL_TEXTURE0 + iIndex);
-//        glBindTexture(GL_TEXTURE_2D, iter->second->mTexture);
-//        glUniform1i(iter->second->mLocation, iIndex);
-//    }
-//
-    //2.激活顶点坐标数组
+    int iIndex = 0;
+    for (auto iter=mUniformTextures.begin();iter!=mUniformTextures.end();++iter){
+        glActiveTexture(GL_TEXTURE0 + iIndex);
+        glBindTexture(GL_TEXTURE_2D, iter->second->mTexture);
+        glUniform1i(iter->second->mLocation, iIndex);
+    }
+    
     glEnableVertexAttribArray(mPositionLocation);
-    //将顶点坐标传入到着色器中
-    glVertexAttribPointer(mPositionLocation, 3, GL_FLOAT, GL_FALSE, 8*sizeof(*vertex), (void*)0);
-    //3.激活顶点颜色数组
+    glVertexAttribPointer(mPositionLocation, 4, GL_FLOAT, GL_FALSE, sizeof(VertexStruct), 0);
     glEnableVertexAttribArray(mColorLocation);
-    //将顶点颜色传入到着色器中
-    glVertexAttribPointer(mColorLocation, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(*vertex), (void*)(sizeof(*vertex)*3));
-    //4.激活纹理
+    glVertexAttribPointer(mColorLocation, 4, GL_FLOAT, GL_FALSE, sizeof(VertexStruct), (void*)(sizeof(float) * 4));
     glEnableVertexAttribArray(mTexCoordLocation);
-    glVertexAttribPointer(mTexCoordLocation, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(*vertex), (void*)(6 * sizeof(*vertex)));
+    glVertexAttribPointer(mTexCoordLocation, 4, GL_FLOAT, GL_FALSE, sizeof(VertexStruct), (void*)(sizeof(float) * 8));
+    glEnableVertexAttribArray(mNormalLocation);
+    glVertexAttribPointer(mNormalLocation, 4, GL_FLOAT, GL_FALSE, sizeof(VertexStruct), (void*)(sizeof(float) * 12));
 
 }
 
@@ -123,88 +119,6 @@ void ShaderProgram::SetTexture(const char *name, const char *imagePath)
 }
 
 
-/**
- 创建shader
-
- @param shaderName shader的代码
- @param shaderType shader类型
- @return 返回shader标识符
- */
-GLuint ShaderProgram::createShader(const char *shaderName, GLenum shaderType)
-{
-    //1.根据shaderType来创建shader
-    GLuint shader =   glCreateShader(shaderType);
-    if (shader == 0){
-        printf("glCreateShader fail\n");
-        return 0;
-    }
-    int fileSize = 0;
-    const char* shaderCode = loadFileCode(shaderName, fileSize);
-    if (shaderCode == nullptr){
-        printf("load shader code from file : %s fail\n", shaderCode);
-        glDeleteShader(shader);
-        delete shaderCode;
-        return 0;
-    }
-    
-    //2.将shader和shader代码绑定
-    glShaderSource(shader, 1, &shaderCode, nullptr);
-    //3.编译shader
-    glCompileShader(shader);
-    GLint compileResult = GL_TRUE;
-    //4.获取shader的编译信息
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &compileResult);
-    
-    if (compileResult ==GL_FALSE) {
-        char szLog[1024] = {0};
-        GLsizei logLen  = 0;
-        glGetShaderInfoLog(shader, 1024, &logLen, szLog);
-        printf("Compile Shader fail error log : %s \nshader code :\n%s\n", szLog, shaderCode);
-        glDeleteShader(shader);
-        shader = 0;
-    }
-    delete shaderCode;
-    return shader;
-}
-
-/**
- 创建程序
-
- @param fragmentShader 片段shader
- @param vertexShader 顶点shader
- @return 程序的标识符
- */
-GLuint ShaderProgram::createProgram(GLuint fragmentShader, GLuint vertexShader)
-{
-    //1.创建shader程序
-    GLuint program = glCreateProgram();
-    //2.将片段shader和顶点shader绑定到程序上去
-    glAttachShader(program, fragmentShader);
-    glAttachShader(program, vertexShader);
-    //3.链接程序
-    glLinkProgram(program);
-    //4.将片段shader和顶点shader 同  程序解除绑定
-    glDetachShader(program, fragmentShader);
-    glDetachShader(program, vertexShader);
-    
-    //5.删除顶点shader和片段shader
-    glDeleteShader(fragmentShader);
-    glDeleteShader(vertexShader);
-    
-    GLint nResult;
-    //6.获取程序结果的信息
-    glGetProgramiv(program, GL_LINK_STATUS, &nResult);
-    
-    if (nResult == GL_FALSE) {
-        char log[1024] = {0};
-        GLsizei writed = 0;
-        glGetProgramInfoLog(program, 1024, &writed, log);
-        printf("Create gpu program fail,link error : %s\n", log);
-        glDeleteProgram(program);
-        program = 0;
-    }
-    return program;
-}
 
 
 

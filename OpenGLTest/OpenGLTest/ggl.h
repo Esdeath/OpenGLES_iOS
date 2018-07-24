@@ -27,4 +27,12 @@
 #include "Glm/glm.hpp"
 #include "Glm/ext.hpp"
 using namespace std;
+
+typedef struct {
+    GLfloat Position[4];//位置
+    GLfloat Normal[4];//法线
+    GLfloat Color[4];//颜色
+    GLfloat Texcoord[4];//纹理
+} VertexStruct;
+
 #endif /* ggl_h */

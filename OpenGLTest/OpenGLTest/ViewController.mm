@@ -38,7 +38,6 @@ Triangles triangles;
     
     view.drawableColorFormat = GLKViewDrawableColorFormatRGBA8888;
     
-    
     // drawableDepthFormat
     //OpenGL上下文还可以（可选地）有另一个缓冲区，称为深度缓冲区。这帮助我们确保更接近观察者的对象显示在远一些的对象的前面（意思就是离观察者近一些的对象会挡住在它后面的对象）。
     // 其缺省的工作方式是：OpenGL把接近观察者的对象的所有像素存储到深度缓冲区，当开始绘制一个像素时，它（OpenGL）首先检查深度缓冲区，看是否已经绘制了更接近观察者的什么东西，如果是则忽略它（要绘制的像素，就是说，在绘制一个像素之前，看看前面有没有挡着它的东西，如果有那就不用绘制了）。否则，把它增加到深度缓冲区和颜色缓冲区。
@@ -60,7 +59,7 @@ Triangles triangles;
     glClearColor(0.0, 1.0, 0.0, 1.0);
     //2.清除颜色缓存和深度缓存
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+    glEnable(GL_DEPTH_TEST);
     
     triangles.Draw();
 }

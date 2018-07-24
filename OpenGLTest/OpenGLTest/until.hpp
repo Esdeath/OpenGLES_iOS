@@ -17,6 +17,7 @@ GLuint CreateBufferObject(GLenum bufferType, GLsizeiptr size, GLenum usage, void
 
 GLuint CreateTexture2DFromPicture(const char *imgFilePath) ;
 
-
+GLuint createProgram(GLuint fragmentShader , GLuint vertexShader);
+GLuint createShader(const char* shaderCode, GLenum shaderType);
 
 #endif /* until_hpp */

@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "Vertex.hpp"
 #include "ShaderProgram.hpp"
-
+#include "TriData.hpp"
 class Triangles {
 
 private:
