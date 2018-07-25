@@ -65,6 +65,7 @@ void ShaderProgram::Draw(float *M,float *V,float *P)
         glBindTexture(GL_TEXTURE_2D, iter->second->mTexture);
         glUniform1i(iter->second->mLocation, iIndex);
     }
+
     
     glEnableVertexAttribArray(mPositionLocation);
     glVertexAttribPointer(mPositionLocation, 4, GL_FLOAT, GL_FALSE, sizeof(VertexStruct), 0);

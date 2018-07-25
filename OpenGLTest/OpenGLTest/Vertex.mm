@@ -4,7 +4,7 @@
 //
 //  Created by EDZ on 2018/7/13.
 //  Copyright © 2018年 EDZ. All rights reserved.
-//
+//995743
 
 #include "Vertex.hpp"
 #include "until.hpp"
@@ -28,48 +28,46 @@ Vertex::~Vertex()
     }
 }
 
-void Vertex::Init()
+void Vertex::Init(int vertexCount , int indexCount)
 {
+    
+    mIndexCount = indexCount;
+    mIndex      = new int[indexCount];
+    memset(mIndex, 0, sizeof(GLuint)*mIndexCount);
+    
+    mVertexCount = vertexCount;
+    mVertexes = new VertexStruct[mVertexCount];
+    memset(mVertexes, 0, sizeof(VertexStruct)*mVertexCount);
+    
     g_vbo = CreateBufferObject(GL_ARRAY_BUFFER, sizeof(VertexStruct)*mVertexCount, GL_STATIC_DRAW,nullptr);
-    g_ebo = CreateBufferObject(GL_ELEMENT_ARRAY_BUFFER, sizeof(float)*mIndexCount, GL_STATIC_DRAW,nullptr);
+   g_ebo = CreateBufferObject(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*mIndexCount, GL_STATIC_DRAW,nullptr);
+
 }
 
 void Vertex::Bind()
 {
     glBindBuffer(GL_ARRAY_BUFFER, g_vbo);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(VertexStruct)*mVertexCount, mVertexes);
-    
+
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER , g_ebo);
-    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(float)*mIndexCount, mIndex);
+    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(GLuint)*mIndexCount, mIndex);
+
 }
 
 void Vertex::UnBind()
 {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
 }
 
-void Vertex::SetIndex(int indexCount)
-{
-    mIndexCount = indexCount;
-    mIndex      = new float[indexCount];
-    memset(mIndex, 0, sizeof(float)*mIndexCount);
-}
 
-void Vertex::SetIndexData(int index, float x)
+void Vertex::SetIndexData(int index, int x)
 {
     if (index >= mIndexCount) {
         printf("index beyond to mIndexCount ");
         return ;
     }
     mIndex[index] = x;
-}
-
-void Vertex::SetSize(int vertexCount) {
-    mVertexCount = vertexCount;
-    mVertexes = new VertexStruct[mVertexCount];
-    memset(mVertexes, 0, sizeof(VertexStruct)*mVertexCount);
 }
 
 void Vertex::SetPosition(int index, float x, float y, float z, float w) {
