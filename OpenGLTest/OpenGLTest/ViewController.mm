@@ -56,10 +56,9 @@ Triangles triangles;
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     //1.设置用来清除颜色
-    glClearColor(0.0, 1.0, 0.0, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
     //2.清除颜色缓存和深度缓存
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
     
     triangles.Draw();
 }

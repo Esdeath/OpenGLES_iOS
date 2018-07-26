@@ -52,10 +52,10 @@ private:
     GLuint mTexcoord;
     GLuint mNormal;
     
-    GLuint mPositionLocation;
-    GLuint mColorLocation;
-    GLuint mTexCoordLocation;
-    GLuint mNormalLocation;
+    GLint mPositionLocation;
+    GLint mColorLocation;
+    GLint mTexCoordLocation;
+    GLint mNormalLocation;
     
     GLint mModelMatrixLocation, mViewMatrixLocation, mProjectionMatrixLocation,mIT_ModelMatrix;
 

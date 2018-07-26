@@ -33,14 +33,14 @@ void Vertex::Init(int vertexCount , int indexCount)
     
     mIndexCount = indexCount;
     mIndex      = new int[indexCount];
-    memset(mIndex, 0, sizeof(GLuint)*mIndexCount);
+    memset(mIndex, 0, sizeof(int)*mIndexCount);
     
     mVertexCount = vertexCount;
     mVertexes = new VertexStruct[mVertexCount];
     memset(mVertexes, 0, sizeof(VertexStruct)*mVertexCount);
     
     g_vbo = CreateBufferObject(GL_ARRAY_BUFFER, sizeof(VertexStruct)*mVertexCount, GL_STATIC_DRAW,nullptr);
-   g_ebo = CreateBufferObject(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*mIndexCount, GL_STATIC_DRAW,nullptr);
+    g_ebo = CreateBufferObject(GL_ELEMENT_ARRAY_BUFFER, sizeof(int)*mIndexCount, GL_STATIC_DRAW,nullptr);
 
 }
 
@@ -50,8 +50,7 @@ void Vertex::Bind()
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(VertexStruct)*mVertexCount, mVertexes);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER , g_ebo);
-    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(GLuint)*mIndexCount, mIndex);
-
+    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(int)*mIndexCount, mIndex);
 }
 
 void Vertex::UnBind()

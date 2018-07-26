@@ -116,7 +116,6 @@
 		0012CA0321032CF9001DE409 /* verbose_operator.inl in Resources */ = {isa = PBXBuildFile; fileRef = 0012C99921032CF9001DE409 /* verbose_operator.inl */; };
 		0012CA0421032CF9001DE409 /* wrap.inl in Resources */ = {isa = PBXBuildFile; fileRef = 0012C99B21032CF9001DE409 /* wrap.inl */; };
 		0012CA0C2104EE8F001DE409 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006E3B5020EA2146004B25EC /* GLKit.framework */; };
-		0012CA1621071230001DE409 /* TriData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0012CA1421071230001DE409 /* TriData.cpp */; };
 		006E3B1F20EA1D13004B25EC /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 006E3B1E20EA1D13004B25EC /* AppDelegate.mm */; };
 		006E3B2220EA1D13004B25EC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 006E3B2120EA1D13004B25EC /* ViewController.mm */; };
 		006E3B2720EA1D13004B25EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006E3B2620EA1D13004B25EC /* Assets.xcassets */; };
@@ -381,8 +380,6 @@
 		0012C99B21032CF9001DE409 /* wrap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wrap.inl; sourceTree = "<group>"; };
 		0012C99D21032CF9001DE409 /* xstream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xstream.hpp; sourceTree = "<group>"; };
 		0012CA132104FC10001DE409 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
-		0012CA1421071230001DE409 /* TriData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TriData.cpp; sourceTree = "<group>"; };
-		0012CA1521071230001DE409 /* TriData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TriData.hpp; sourceTree = "<group>"; };
 		006E3B1A20EA1D13004B25EC /* OpenGLTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGLTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006E3B1D20EA1D13004B25EC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		006E3B1E20EA1D13004B25EC /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -746,8 +743,6 @@
 				0012C8AD21003CD2001DE409 /* until.hpp */,
 				0012CA132104FC10001DE409 /* stb_image.h */,
 				0012C8B521032CA7001DE409 /* ggl.h */,
-				0012CA1421071230001DE409 /* TriData.cpp */,
-				0012CA1521071230001DE409 /* TriData.hpp */,
 			);
 			path = OpenGLTest;
 			sourceTree = "<group>";
@@ -1025,7 +1020,6 @@
 				006E3B1F20EA1D13004B25EC /* AppDelegate.mm in Sources */,
 				0012C99F21032CF9001DE409 /* dummy.cpp in Sources */,
 				0012C8AE21003CD2001DE409 /* until.mm in Sources */,
-				0012CA1621071230001DE409 /* TriData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

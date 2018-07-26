@@ -24,7 +24,7 @@ void ShaderProgram::Init(const char* vs , const char* fs)
         return ;
     }
     //2.创建顶点着色器
-    GLuint vertexShader  =  createShader(vs, GL_VERTEX_SHADER);
+    GLuint vertexShader     =  createShader(vs, GL_VERTEX_SHADER);
     
     if (vertexShader == 0) {
         printf("Failed To create Vertex shader");
@@ -35,14 +35,45 @@ void ShaderProgram::Init(const char* vs , const char* fs)
     if (mProgram != 0) {
         //glGetAttribLocation获取顶点着色器 attribute修饰的变量名的index。可以通过这个index向顶点着色器传递数据
         mPositionLocation = glGetAttribLocation(mProgram, "position");
+        if (mPositionLocation == -1) {
+            printf("GLSL Do Not Have positon \n");
+        }
+        
         mColorLocation    = glGetAttribLocation(mProgram, "color");
+        if (mColorLocation == -1) {
+            printf("GLSL Do Not Have color \n");
+        }
+        
         mTexCoordLocation = glGetAttribLocation(mProgram, "aTexCoord");
+        if (mTexCoordLocation == -1) {
+            printf("GLSL Do Not Have aTexCoord \n");
+        }
         
         mModelMatrixLocation      = glGetUniformLocation(mProgram, "ModelMatrix");
+        if (mModelMatrixLocation == -1) {
+            printf("GLSL Do Not Have ModelMatrix \n");
+        }
+        
         mViewMatrixLocation       = glGetUniformLocation(mProgram, "ViewMatrix");
+        if (mViewMatrixLocation == -1) {
+            printf("GLSL Do Not Have ViewMatrix \n");
+        }
+        
         mProjectionMatrixLocation = glGetUniformLocation(mProgram, "ProjectionMatrix");
+        if (mProjectionMatrixLocation == -1) {
+            printf("GLSL Do Not Have ProjectionMatrix \n");
+        }
+        
         mIT_ModelMatrix           = glGetUniformLocation(mProgram, "IT_ModelMatrix");
+        if (mIT_ModelMatrix == -1) {
+            printf("GLSL Do Not Have IT_ModelMatrix \n");
+        }
+        
         mNormalLocation           = glGetAttribLocation(mProgram, "normal");
+        if (mNormalLocation == -1) {
+            printf("GLSL Do Not Have normal \n");
+        }
+        
     }
 }
 
@@ -66,7 +97,6 @@ void ShaderProgram::Draw(float *M,float *V,float *P)
         glUniform1i(iter->second->mLocation, iIndex);
     }
 
-    
     glEnableVertexAttribArray(mPositionLocation);
     glVertexAttribPointer(mPositionLocation, 4, GL_FLOAT, GL_FALSE, sizeof(VertexStruct), 0);
     glEnableVertexAttribArray(mColorLocation);
@@ -109,7 +139,7 @@ void ShaderProgram::SetTexture(const char *name, const char *imagePath)
     if (iter == mUniformTextures.end()) {
         GLint location = glGetUniformLocation(mProgram, name);
         if (location != -1) {
-            UniformTexture*t = new UniformTexture;
+            UniformTexture *t = new UniformTexture;
             t->mLocation = location;
             t->mTexture = CreateTexture2DFromPicture(imagePath);
             mUniformTextures.insert(std::pair<std::string, UniformTexture*>(name, t));

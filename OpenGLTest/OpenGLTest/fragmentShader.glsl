@@ -1,5 +1,5 @@
 
-varying lowp vec3  a_Color;
+varying lowp vec4  a_Color;
 varying lowp vec2  TexCoord;
 
 uniform lowp sampler2D texture1;

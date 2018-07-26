@@ -30,9 +30,12 @@ using namespace std;
 
 typedef struct {
     GLfloat Position[4];//位置
-    GLfloat Normal[4];//法线
     GLfloat Color[4];//颜色
     GLfloat Texcoord[4];//纹理
+    GLfloat Normal[4];//法线
 } VertexStruct;
+
+#define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
 
 #endif /* ggl_h */
