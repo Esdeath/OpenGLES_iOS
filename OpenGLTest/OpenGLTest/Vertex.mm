@@ -9,6 +9,7 @@
 #include "Vertex.hpp"
 #include "until.hpp"
 
+
 static GLuint g_vbo;
 static GLuint g_ebo;
 
@@ -51,6 +52,7 @@ void Vertex::Bind()
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER , g_ebo);
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(int)*mIndexCount, mIndex);
+    
 }
 
 void Vertex::UnBind()

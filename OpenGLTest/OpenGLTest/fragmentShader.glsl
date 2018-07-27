@@ -7,5 +7,8 @@ uniform lowp sampler2D texture2;
 
 void main()
 {
-    gl_FragColor = texture2D(texture1, TexCoord);
+    gl_FragColor =mix(texture2D(texture1, TexCoord), texture2D(texture2, TexCoord), 0.2);
+    //texture2D(texture1, TexCoord);
+   // gl_FragColor =texture2D(texture1, TexCoord);
+
 }

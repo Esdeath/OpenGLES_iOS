@@ -116,6 +116,7 @@
 		0012CA0321032CF9001DE409 /* verbose_operator.inl in Resources */ = {isa = PBXBuildFile; fileRef = 0012C99921032CF9001DE409 /* verbose_operator.inl */; };
 		0012CA0421032CF9001DE409 /* wrap.inl in Resources */ = {isa = PBXBuildFile; fileRef = 0012C99B21032CF9001DE409 /* wrap.inl */; };
 		0012CA0C2104EE8F001DE409 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006E3B5020EA2146004B25EC /* GLKit.framework */; };
+		002A5D24210B03C5001A135E /* ayaseeri.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 002A5D23210B03C5001A135E /* ayaseeri.jpeg */; };
 		006E3B1F20EA1D13004B25EC /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 006E3B1E20EA1D13004B25EC /* AppDelegate.mm */; };
 		006E3B2220EA1D13004B25EC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 006E3B2120EA1D13004B25EC /* ViewController.mm */; };
 		006E3B2720EA1D13004B25EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006E3B2620EA1D13004B25EC /* Assets.xcassets */; };
@@ -380,6 +381,7 @@
 		0012C99B21032CF9001DE409 /* wrap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wrap.inl; sourceTree = "<group>"; };
 		0012C99D21032CF9001DE409 /* xstream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xstream.hpp; sourceTree = "<group>"; };
 		0012CA132104FC10001DE409 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		002A5D23210B03C5001A135E /* ayaseeri.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ayaseeri.jpeg; sourceTree = "<group>"; };
 		006E3B1A20EA1D13004B25EC /* OpenGLTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGLTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006E3B1D20EA1D13004B25EC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		006E3B1E20EA1D13004B25EC /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -721,6 +723,7 @@
 			children = (
 				0012C8B821032CF8001DE409 /* Glm */,
 				0012C8B321032BFC001DE409 /* test.bmp */,
+				002A5D23210B03C5001A135E /* ayaseeri.jpeg */,
 				00A7631320EDF936005B595D /* fragmentShader.glsl */,
 				00A7631220EDF936005B595D /* vertexShader.glsl */,
 				006E3B1D20EA1D13004B25EC /* AppDelegate.h */,
@@ -885,6 +888,7 @@
 				0012C9B721032CF9001DE409 /* type_mat3x4.inl in Resources */,
 				0012C9D721032CF9001DE409 /* extend.inl in Resources */,
 				0012C9CD21032CF9001DE409 /* ulp.inl in Resources */,
+				002A5D24210B03C5001A135E /* ayaseeri.jpeg in Resources */,
 				0012C9D921032CF9001DE409 /* fast_exponential.inl in Resources */,
 				0012C9B121032CF9001DE409 /* type_mat.inl in Resources */,
 				0012C9F021032CF9001DE409 /* orthonormalize.inl in Resources */,

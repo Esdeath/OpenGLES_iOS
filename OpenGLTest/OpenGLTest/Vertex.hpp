@@ -16,7 +16,6 @@
 class Vertex {
     
 private:
-    
     VertexStruct *mVertexes;
     int mVertexCount;
 
@@ -39,5 +38,13 @@ public:
     void SetPosition(int index, float x, float y, float z, float w = 1.0f);
     VertexStruct &Get(int index);
 };
+
+
+/*
+ float vertices[] =
+ // world space positions of our cubes
+
+ */
+
 
 #endif /* Vertex_hpp */

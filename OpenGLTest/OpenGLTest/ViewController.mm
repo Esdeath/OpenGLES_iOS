@@ -53,6 +53,7 @@ Triangles triangles;
 }
 
 
+
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     //1.设置用来清除颜色
